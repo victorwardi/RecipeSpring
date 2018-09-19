@@ -1,5 +1,7 @@
 package guru.spring.recipe.recipespring.model;
 
+import guru.spring.recipe.recipespring.model.enums.Difficulty;
+
 import javax.persistence.*;
 import java.util.Set;
 
@@ -20,7 +22,9 @@ public class Recipe {
     private String source;
     private String url;
     private String direction;
-    //private Difficulty difficulty;
+
+    @Enumerated(value = EnumType.STRING)
+    private Difficulty difficulty;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "recipe")
     private Set<Ingredient> ingredients;
@@ -30,6 +34,9 @@ public class Recipe {
 
     @OneToOne(cascade = CascadeType.ALL)
     private Note note;
+
+    @ManyToMany
+    private Set<Category> categories;
 
     public Long getId() {
         return id;
@@ -93,6 +100,14 @@ public class Recipe {
 
     public void setDirection(String direction) {
         this.direction = direction;
+    }
+
+    public Difficulty getDifficulty() {
+        return difficulty;
+    }
+
+    public void setDifficulty(Difficulty difficulty) {
+        this.difficulty = difficulty;
     }
 
     public Set<Ingredient> getIngredients() {

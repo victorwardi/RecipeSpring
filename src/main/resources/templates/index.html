@@ -7,7 +7,20 @@
 <body>
 <h1 th:text="${appName}">Recipe App</h1>
 
-<p th:each="recipe : ${recipes}" th:text="${recipe}">Recipe</p>
-
+<div class="recipe" th:each="recipe : ${recipes}">
+    <h2 class="" th:text="${recipe.getDescription()}">Recipe Description</h2>
+    <div class="" th:text="${'Preparation Time: ' + recipe.getPrepTime() + ' minutes'}">Preparation Time: 40 min</div>
+    <div class="" th:text="${'Cooking Time: ' + recipe.getCookTime() + ' minutes'}">Cooking Time: 20 minutes</div>
+    <div class="" th:text="${'Servings: ' + recipe.getServings()}">Servings: 4</div>
+    <div class="" th:text="${'Source: ' + recipe.getSource()}">Sorce: Foods Inc.</div>
+    <div class="ingredients-list">
+        <h3>Ingredients</h3>
+        <ul class="ingredients">
+            <li th:each="ingredient : ${recipe.getIngredients()}"
+                th:text="${ingredient.getAmount() + ' ' + ingredient.getUom().getDescription() + ' '+ ingredient.getDescription()}"></li>
+        </ul>
+    </div>
+    <p class="" th:utext="${recipe.getDirection()}">Directions</p>
+</div>
 </body>
 </html>

@@ -1,11 +1,9 @@
 package guru.spring.recipe.recipespring.controller;
 
+import guru.spring.recipe.recipespring.service.RecipeService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import java.util.Arrays;
-import java.util.List;
 
 /**
  * Created by Victor Wardi - @vwardi - on 04/09/2018.
@@ -13,13 +11,18 @@ import java.util.List;
 @Controller
 public class IndexController {
 
+    private final RecipeService recipeService;
+
+    public IndexController(RecipeService recipeService) {
+        this.recipeService = recipeService;
+    }
+
     @RequestMapping({"", "/", "/index"})
-    public  String getIndexPage(Model model){
-         model.addAttribute("appName", "My Recipes APP");
+    public String getIndexPage(Model model) {
 
-        List<String> recipes = Arrays.asList("Orange Cake", "Chocolate Cookie", "Strawberry Jam", "Baked Potatoes");
-        model.addAttribute("recipes", recipes);
+        model.addAttribute("appName", "My Recipes APP");
 
+        model.addAttribute("recipes",   this.recipeService.getRecipes());
 
         return "index";
     }

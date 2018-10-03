@@ -6,6 +6,7 @@ import guru.spring.recipe.recipespring.model.enums.Difficulty;
 import guru.spring.recipe.recipespring.repository.CategoryRepository;
 import guru.spring.recipe.recipespring.repository.RecipeRepository;
 import guru.spring.recipe.recipespring.repository.UnitOfMeasureRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
@@ -15,6 +16,7 @@ import java.math.BigDecimal;
 /**
  * Created by Victor Wardi - @vwardi - on 20/09/2018.
  */
+@Slf4j
 @Component
 public class DataLoader implements ApplicationListener<ContextRefreshedEvent> {
 

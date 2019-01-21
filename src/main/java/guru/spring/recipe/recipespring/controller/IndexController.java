@@ -29,4 +29,9 @@ public class IndexController {
         return "index";
     }
 
+    @RequestMapping({"/teste"})
+    public String getTestPage() {
+        return "test";
+    }
+
 }

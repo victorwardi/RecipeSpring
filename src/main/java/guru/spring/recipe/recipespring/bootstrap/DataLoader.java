@@ -10,6 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 
@@ -32,6 +33,7 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent> {
     }
 
     @Override
+    @Transactional
     public void onApplicationEvent(ContextRefreshedEvent event) {
         loadData();
     }
@@ -81,6 +83,12 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent> {
         guacamole.getCategories().add(categoryRepository.findByDescription("Fast").get());
 
         recipeRepository.save(guacamole);
+
+
+        Recipe appleCake  = new Recipe();
+        appleCake.setDescription("Apple Cake!");
+
+        recipeRepository.save(appleCake);
     }
 
 
